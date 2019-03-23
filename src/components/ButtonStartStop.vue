@@ -50,6 +50,9 @@ export default {
       src.start();
     },
     startPing() {
+      if (!isFinite(this.beatPerMilliSecond)) {
+        this.$store.commit("tempo/updateTempo", 60);
+      }
       this.ping();
       this.loopId = setInterval(this.ping, this.beatPerMilliSecond);
     },
