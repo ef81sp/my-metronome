@@ -62,9 +62,22 @@ export default {
     }
   },
   watch: {
+    /**
+     * - 作動中にテンポを動かしたときにそのテンポに更新する
+     * - 作動中にテンポを空にしたとき止める
+     */
     beatPerMilliSecond() {
+      // 作動中だけ実行
       if (this.label === "START") return;
+
       this.endPing();
+
+      // (作動中に)テンポを空にしたら止める
+      if (!this.tempo) {
+        return;
+      }
+
+      // 再起動
       this.startPing();
     }
   }
