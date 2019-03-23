@@ -36,11 +36,9 @@ export default {
   methods: {
     startStop() {
       if (this.label === "START") {
-        this.label = "STOP";
         this.startPing();
       } else {
         this.endPing();
-        this.label = "START";
       }
     },
     ping() {
@@ -55,10 +53,12 @@ export default {
       }
       this.ping();
       this.loopId = setInterval(this.ping, this.beatPerMilliSecond);
+      this.label = "STOP";
     },
     endPing() {
       clearInterval(this.loopId);
       this.loopId = null;
+      this.label = "START";
     }
   },
   watch: {
